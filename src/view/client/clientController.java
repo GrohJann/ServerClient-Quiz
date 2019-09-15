@@ -1,19 +1,20 @@
 package view.client;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.input.KeyCode;
-
-import java.net.Inet4Address;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
+
+/**
+ * Class Created by Jannis
+ */
 public class clientController implements Initializable {
     
     private Control.EchoClient client;
@@ -23,15 +24,19 @@ public class clientController implements Initializable {
     @FXML
     private JFXTextField port_input;
     @FXML
-    private JFXTextField message_input;
+    private JFXListView player_list;
     @FXML
-    private JFXTextArea output_field;
+    private JFXTextArea question_field;
     @FXML
     private JFXButton connect_btn;
     @FXML
     private JFXButton disconnect_btn;
     @FXML
-    private JFXButton send_btn;
+    private JFXButton answer_one;
+    @FXML
+    private JFXButton answer_two;
+    @FXML
+    private JFXButton answer_three;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,22 +52,29 @@ public class clientController implements Initializable {
                 closeConnection();
             }
         });
-        send_btn.setOnAction(new EventHandler<ActionEvent>() {
+        answer_one.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                send();
+                send(1);
             }
         });
-        message_input.setOnKeyPressed((event) -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                send();
+        answer_two.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                send(2);
+            }
+        });
+        answer_three.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                send(3);
             }
         });
         
         ip_input.setText("127.0.0.1");
         port_input.setText("56789");
         
-        addToOutput("Willkommen beim Test-Client.");
+        addToOutput("Willkommen beim Quiz-Client.");
         addToOutput("Tragen Sie eine IP-Adresse eines Test-Servers samt passenden Port oben ein. Die Nachricht können Sie überarbeiten.");
         addToOutput("Die Nachricht kann an den Server gesendet werden, der Server kann mit einer beliebingen Antwort antworten.");
         addToOutput("-----------------------------------------------------------------------------------");
@@ -75,10 +87,10 @@ public class clientController implements Initializable {
      * @param text
      */
     private void addToOutput(String text) {
-        if (output_field.getText().isEmpty()) {
-            output_field.setText(text);
+        if (question_field.getText().isEmpty()) {
+            question_field.setText(text);
         } else {
-            output_field.setText(output_field.getText() + "\n" + text);
+            question_field.setText(question_field.getText() + "\n" + text);
         }
     }
     
@@ -99,10 +111,10 @@ public class clientController implements Initializable {
     /**
      * An den Server wird die Nachricht geschickt, die sich im TextField message befindet. Diese wird über den client gesendet.
      */
-    private void send() {
-        if (!message_input.getText().equals("")) {
-            client.send(this.message_input.getText());
-            this.message_input.setText("");
+    private void send(int answer) {
+        if (answer <= 3){
+            //TODO hier muss was gemacht werden
+            System.out.println("Answer " + answer + " pressed");
         }
     }
     
@@ -113,7 +125,9 @@ public class clientController implements Initializable {
     public void switchButtons() {
         connect_btn.setDisable(!connect_btn.isDisabled());
         disconnect_btn.setDisable(!disconnect_btn.isDisabled());
-        send_btn.setDisable(!send_btn.isDisabled());
+        answer_one.setDisable(!answer_one.isDisabled());
+        answer_two.setDisable(!answer_two.isDisabled());
+        answer_three.setDisable(!answer_three.isDisabled());
     }
     
     /**
@@ -125,4 +139,5 @@ public class clientController implements Initializable {
         addToOutput(text);
     }
     
+    //TODO methode zu anzeigen der Spieler mit punktzahl
 }

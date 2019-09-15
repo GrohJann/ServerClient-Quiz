@@ -4,15 +4,16 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<!--
+Class created by Jannis
+-->
 
-<AnchorPane fx:controller="view.server.serverController" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #4d4d4d;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #4d4d4d;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.server.serverController">
    <children>
       <JFXTextField fx:id="port_input" focusColor="#16c90c" layoutX="22.0" layoutY="30.0" prefHeight="25.0" prefWidth="183.0" promptText="Port" style="-fx-background-color: white;" unFocusColor="#5abb1a" />
-      <JFXTextField fx:id="message_input" focusColor="#5abb1a" layoutX="22.0" layoutY="83.0" prefHeight="25.0" prefWidth="250.0" promptText="Message" style="-fx-background-color: white;" unFocusColor="#5abb1a" />
-      <JFXTextArea fx:id="log_field" editable="false" focusColor="#5abb1a" layoutX="22.0" layoutY="128.0" prefHeight="252.0" prefWidth="317.0" promptText="Keine Log-Daten erfasst" style="-fx-background-color: white;" unFocusColor="#5abb1a" wrapText="true" />
+      <JFXTextArea fx:id="log_field" editable="false" focusColor="#5abb1a" layoutX="22.0" layoutY="71.0" prefHeight="309.0" prefWidth="317.0" promptText="Keine Log-Daten erfasst" style="-fx-background-color: white;" unFocusColor="#5abb1a" wrapText="true" />
       <JFXButton fx:id="open_btn" layoutX="217.0" layoutY="31.0" prefHeight="25.0" prefWidth="54.0" ripplerFill="#5abb1a" style="-fx-background-color: white;" text="Open" textAlignment="CENTER" textFill="#5abb1a" />
       <JFXTextArea fx:id="clients_field" editable="false" focusColor="#5abb1a" layoutX="358.0" layoutY="20.0" prefHeight="360.0" prefWidth="222.0" promptText="Kein Client angemeldet" style="-fx-background-color: white;" unFocusColor="#5abb1a" />
       <JFXButton fx:id="close_btn" disable="true" layoutX="285.0" layoutY="31.0" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: white;" text="Close" textAlignment="CENTER" textFill="#5abb1a" />
-      <JFXButton fx:id="send_btn" disable="true" layoutX="285.0" layoutY="83.0" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: white;" text="Send" textAlignment="CENTER" textFill="#5abb1a" />
    </children>
 </AnchorPane>

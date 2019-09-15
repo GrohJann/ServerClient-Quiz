@@ -7,19 +7,20 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.input.KeyCode;
 
+
+/**
+ * Class created bay Jannis
+ */
 public class serverController {
     
     private Control.EchoServer server;
     
     @FXML private JFXTextField port_input;
-    @FXML private JFXTextField message_input;
     @FXML private JFXTextArea log_field;
     @FXML private JFXTextArea clients_field;
     @FXML private JFXButton open_btn;
     @FXML private JFXButton close_btn;
-    @FXML private JFXButton send_btn;
     
     @FXML
     private void initialize(){
@@ -34,11 +35,6 @@ public class serverController {
             @Override
             public void handle(ActionEvent e) { closeServer(); }
         });
-        send_btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) { sendToClients(); }
-        });
-        message_input.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { sendToClients(); } });
     }
     
     /**
@@ -69,24 +65,12 @@ public class serverController {
     }
     
     /**
-     * Die eingetragene Nachricht wird genau so wie sie eingetragen wird ohne weitere Zusätze an alle Clients versendet.
-     */
-    private void sendToClients(){
-        if (!message_input.getText().equals("")) {
-            server.sendToAll("Server > " + message_input.getText());
-            addToSyslog("Sever > " + message_input.getText());
-            message_input.setText("");
-        }
-    }
-    
-    /**
      * Der Status der Knöpfe wird geändert.
      * Diese Methode sollte vom EchoServer-Objekt aufgerufen werden, sobald dieses einen Port geöffnet geschlossen hat.
      */
     public void buttonSwitch(){
         open_btn.setDisable(!open_btn.isDisabled());
         close_btn.setDisable(!close_btn.isDisabled());
-        send_btn.setDisable(!send_btn.isDisabled());
     }
     
     /**
@@ -107,14 +91,6 @@ public class serverController {
      */
     public void processMessage(String pClientIP, int pClientPort, String pMessage){
         addToSyslog(new java.util.Date().toString() + " - " + pClientIP + ":" + pClientPort +" - " + pMessage);
-    }
-    
-    /**
-     * Methode gibt den Text zurück, der im Message-Textfield steht.
-     * @return
-     */
-    public String getMessage(){
-        return message_input.getText();
     }
     
     /**
