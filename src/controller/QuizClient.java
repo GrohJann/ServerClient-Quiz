@@ -4,12 +4,12 @@ import view.client.clientController;
 
 
 
-public class EchoClient
+public class QuizClient
         extends Control.Client
 {
     private clientController panelHandler;
     
-    public EchoClient(String pServerIP, int pServerPort, clientController panelHandler) {
+    public QuizClient(String pServerIP, int pServerPort, clientController panelHandler) {
         super(pServerIP, pServerPort);
         
         this.panelHandler = panelHandler;

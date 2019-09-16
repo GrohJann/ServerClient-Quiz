@@ -1,17 +1,23 @@
 package Control;
 
 import model.List;
+import model.Player;
 import view.server.serverController;
 
 
-public class EchoServer extends Control.Server {
+public class QuizServer extends Control.Server {
     private serverController panelHandler;
+    private Player[] player;
+    private int playerConnected;
     private List<String> clients;
     
-    public EchoServer(int pPort, serverController panel) {
+    public QuizServer(int pPort, serverController panel) {
         super(pPort);
         this.clients = new List();
         this.panelHandler = panel;
+
+        this.player = new Player[3];
+        this.playerConnected = 0;
         
         if (isOpen()) {
             this.panelHandler.buttonSwitch();
@@ -26,11 +32,38 @@ public class EchoServer extends Control.Server {
         this.clients.append(pClientIP + ":" + pClientPort);
         this.panelHandler.newConnection(pClientIP, pClientPort);
     }
-    
-    
+
+    //TODO fertig stellen
     public void processMessage(String pClientIP, int pClientPort, String pMessage) {
-        this.panelHandler.processMessage(pClientIP, pClientPort, pMessage);
-        sendToAll(pClientIP + " > " +pMessage);
+        String[] message = pMessage.split(">");
+        //Anmeldung
+        if (message[0].equals("ANMELDUNG") && playerConnected <= 3){
+            if (!message[1].equals("")) {
+                player[playerConnected] = new Player(message[1]);
+                playerConnected++;
+                send(pClientIP, pClientPort, "ANGEMELDET");
+                switch (playerConnected){
+                    case 1: sendToAll("WARTE>2");
+                        break;
+                    case 2: sendToAll("WARTE>1");
+                        break;
+                    case 3: sendToAll("SPIELSTART");
+                        break;
+
+                    default: System.err.println("too many or to less player\n  ---> ERROR in switch/case");
+                }
+            } else {
+                send(pClientIP, pClientPort, "AUFFORDERUNG");
+            }
+        } else {
+            send(pClientIP, pClientPort, "SERVERVOLL");
+        }
+
+        //Spielphase
+    }
+
+    //TODO fertig stellen
+    public void processMessage(String pMessage) {
     }
     
     

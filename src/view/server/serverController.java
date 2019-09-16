@@ -14,7 +14,7 @@ import javafx.fxml.FXML;
  */
 public class serverController {
     
-    private Control.EchoServer server;
+    private Control.QuizServer server;
     
     @FXML private JFXTextField port_input;
     @FXML private JFXTextArea log_field;
@@ -50,14 +50,14 @@ public class serverController {
     }
     
     /**
-     * Es wird ein neues EchoServer-Objekt instanziiert.
+     * Es wird ein neues QuizServer-Objekt instanziiert.
      */
     private void openServer(){
-        server = new Control.EchoServer(Integer.parseInt(port_input.getText()), this);
+        server = new Control.QuizServer(Integer.parseInt(port_input.getText()), this);
     }
     
     /**
-     * Das EchoServer-Objekt schließt den Port.
+     * Das QuizServer-Objekt schließt den Port.
      */
     private void closeServer(){
         server.close();
@@ -66,7 +66,7 @@ public class serverController {
     
     /**
      * Der Status der Knöpfe wird geändert.
-     * Diese Methode sollte vom EchoServer-Objekt aufgerufen werden, sobald dieses einen Port geöffnet geschlossen hat.
+     * Diese Methode sollte vom QuizServer-Objekt aufgerufen werden, sobald dieses einen Port geöffnet geschlossen hat.
      */
     public void buttonSwitch(){
         open_btn.setDisable(!open_btn.isDisabled());
@@ -74,7 +74,7 @@ public class serverController {
     }
     
     /**
-     * Methode wird vom EchoServer-Objekt aufgerufen, sobald ein neuer Client sich angemeldet hat.
+     * Methode wird vom QuizServer-Objekt aufgerufen, sobald ein neuer Client sich angemeldet hat.
      * @param pClientIP
      * @param pClientPort
      */
@@ -84,7 +84,7 @@ public class serverController {
     }
     
     /**
-     * Methode wird vom EchoServer-Objekt aufgerufen, sobald ein Client eine Nachricht geschickt hat.
+     * Methode wird vom QuizServer-Objekt aufgerufen, sobald ein Client eine Nachricht geschickt hat.
      * @param pClientIP
      * @param pClientPort
      * @param pMessage

@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
  */
 public class clientController implements Initializable {
     
-    private Control.EchoClient client;
+    private Control.QuizClient client;
     
     @FXML
     private JFXTextField ip_input;
@@ -95,10 +95,11 @@ public class clientController implements Initializable {
     }
     
     /**
-     * Es wird ein Objekt der Klasse EchoClient instanziiert.
+     * Es wird ein Objekt der Klasse QuizClient instanziiert.
      */
     private void connect() {
-        client = new Control.EchoClient(ip_input.getText(), Integer.parseInt(port_input.getText()), this);
+        client = new Control.QuizClient(ip_input.getText(), Integer.parseInt(port_input.getText()), this);
+        client.send("ANMELDEN");
     }
     
     /**
@@ -120,7 +121,7 @@ public class clientController implements Initializable {
     
     /**
      * Der Status der Knöpfe wird geändert.
-     * Diese Methode sollte vom EchoClient-Objekt aufgerufen werden, sobald sich dieser mit einem Server verbunden oder die Verbindung geschlossen hat.
+     * Diese Methode sollte vom QuizClient-Objekt aufgerufen werden, sobald sich dieser mit einem Server verbunden oder die Verbindung geschlossen hat.
      */
     public void switchButtons() {
         connect_btn.setDisable(!connect_btn.isDisabled());
@@ -131,7 +132,7 @@ public class clientController implements Initializable {
     }
     
     /**
-     * Methode wird vom EchoClient aufgerufen, sobald dieser eine Nachricht erhalten und gefiltert hat.
+     * Methode wird vom QuizClient aufgerufen, sobald dieser eine Nachricht erhalten und gefiltert hat.
      *
      * @param text
      */
