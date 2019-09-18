@@ -99,7 +99,7 @@ public class clientController implements Initializable {
      */
     private void connect() {
         client = new Control.QuizClient(ip_input.getText(), Integer.parseInt(port_input.getText()), this);
-        client.send("ANMELDEN");
+        client.send("ANMELDUNG>Jannis");
     }
     
     /**
